@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Movie</title>
+    <style th:replace="~{fragments/fragment :: base-styling}"></style>
+
+    <style>
+        #form-page-container {
+           font-family: Arial, sans-serif;
+           max-width: 600px;
+           margin: 0 auto;
+           padding: 20px;
+       }
+       .form-container {
+           background-color: #f5f5f5;
+           padding: 20px;
+           border-radius: 5px;
+       }
+       form div {
+           margin-bottom: 15px;
+       }
+       label {
+           display: inline-block;
+           width: 150px;
+       }
+       input[type="text"], input[type="number"] {
+           width: 200px;
+           padding: 5px;
+       }
+       button {
+           background-color: #4CAF50;
+           color: white;
+           padding: 10px 20px;
+           border: none;
+           border-radius: 4px;
+           cursor: pointer;
+       }
+       a {
+           display: inline-block;
+           margin-top: 20px;
+           color: #666;
+           text-decoration: none;
+       }
+    </style>
+</head>
+<body>
+
+    <div th:replace="~{fragments/fragment :: navbar}"></div>
+
+
+    <div id="form-page-container">
+        <div class="form-container">
+            <form method="post" th:action="@{/directors/new}" th:object="${director}">
+                <h1>Create new Director</h1>
+                <div>
+                    <label for="firstName">First Name: </label>
+                    <input th:field="*{firstName}" required  type="text" id="firstName" minlength="5" maxlength="255" >
+
+                </div>
+
+
+                <div>
+                    <label for="lastName">Last Name: </label>
+                    <input th:field="*{lastName}" required  type="text" id="lastName" minlength="5" maxlength="255" >
+                </div>
+
+                <div>
+                    <label for="birthDate">Birth Date: </label>
+                    <input th:field="*{birthDate}" required  type="date" id="birthDate">
+                </div>
+
+
+                <div>
+                    <label for="nationality">Nationality: </label>
+                    <input th:field="*{nationality}" required  type="text" id="nationality">
+                </div>
+
+                <div>
+                    <label for="wonOscars">Won Oscars? </label>
+                    <input th:field="*{wonOscars}"  type="checkbox" id="wonOscars">
+                </div>
+
+
+                <button>Create Director</button>
+
+
+
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

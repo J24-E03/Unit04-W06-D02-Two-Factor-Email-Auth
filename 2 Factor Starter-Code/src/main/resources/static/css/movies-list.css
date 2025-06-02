@@ -1,0 +1,14 @@
+.movie-card{
+    border: 1px solid rgb(238, 190, 190);
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+       .validation-messages { padding: 15px; margin: 10px 0; border: 1px solid #dc3545; background-color: #fff3f3; }
+        .field-error { background-color: #ffebeb; }
+        .error-text { color: #dc3545; font-size: 0.8em; margin-top: 4px; }
+        .invalid-field { border-bottom: 2px solid #dc3545; }
+        .search-form { margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 5px; }
+        .search-form input, .search-form select { margin: 5px; padding: 5px; }
+        .search-form button { margin: 5px; padding: 5px 15px; }

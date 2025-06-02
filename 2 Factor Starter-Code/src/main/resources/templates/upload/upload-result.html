@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Upload Result</title></head>
+<body>
+<h2>Upload Result</h2>
+<div th:if="${imageUrl}">
+    <p>Image uploaded successfully:</p>
+    <img th:src="${imageUrl}" width="300"/>
+</div>
+<div th:if="${error}">
+    <p th:text="${error}"></p>
+</div>
+</body>
+</html>
+

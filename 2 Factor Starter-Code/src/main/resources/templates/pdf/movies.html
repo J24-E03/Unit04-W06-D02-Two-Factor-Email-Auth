@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Movies List</title>
+    <style>
+        @page { size: A4; margin: 2cm; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .header h1 {
+            color: #2c3e50;
+            margin: 0;
+            font-size: 28px;
+        }
+        .date {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 12px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        .oscar-winner {
+            color: #f1c40f;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Movie Collection</h1>
+    <div class="date" th:text="${#temporals.format(#temporals.createNow(), 'dd MMMM yyyy')}"></div>
+</div>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Director</th>
+        <th>Release Year</th>
+        <th>Duration</th>
+        <th>Language</th>
+        <th>Genres</th>
+    </tr>
+    <tr th:each="movie : ${movies}">
+        <td>
+            <span th:text="${movie.title}" th:class="${movie.wonOscars ? 'oscar-winner' : ''}"></span>
+        </td>
+        <td th:text="${movie.director != null ? movie.director.firstName : '-'}"></td>
+        <td th:text="${movie.releaseYear}"></td>
+        <td th:text="${movie.duration + ' min'}"></td>
+        <td th:text="${movie.language}"></td>
+        <td th:text="${#strings.listJoin(movie.genres.![name], ', ')}"></td>
+    </tr>
+</table>
+<div class="footer">
+    <span>Page 1</span>
+</div>
+</body>
+</html>

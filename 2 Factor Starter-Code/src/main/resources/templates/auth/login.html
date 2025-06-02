@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+          crossorigin="anonymous">
+</head>
+<body>
+<div th:replace="~{fragments/fragment :: navbar}"></div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Login</h3>
+
+                    <div th:if="${param.logout}" class="alert alert-success" role="alert">
+                        Thanks for coming. Please come back
+                    </div>
+
+
+                    <!-- Error message for failed login attempts -->
+                    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                        Invalid username or password
+                    </div>
+
+                    <!-- Success message after registration -->
+                    <div th:if="${param.registered}" class="alert alert-success" role="alert">
+                        Registration successful. Please log in.
+                    </div>
+
+                    <form th:action="@{/auth/login}" method="post">
+                        <!-- CSRF Token -->
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="text" class="form-control" id="email" name="email" required/>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" required/>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Log in</button>
+                        </div>
+                    </form>
+
+                    <p class="mt-3 text-center">
+                        <a th:href="@{/auth/signup}">Don't have an account? Sign up</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76A2z02tPqdjF5c6gS1VJpzmKjc5G2X1Lz6RLa0Ry6xkTf65vuF1UUE00o3rQ2U"
+        crossorigin="anonymous"></script>
+</body>
+</html>
