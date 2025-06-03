@@ -13,4 +13,10 @@ public class GlobalExceptionHandler {
         model.addAttribute("error",ex.getMessage());
         return "errors/404";
     }
+
+
+    @ExceptionHandler(UserNotVerifiedException.class)
+    public String handleUserNotVerified(UserNotVerifiedException ex, Model model) {
+        return "auth/login?notVerified";
+    }
 }

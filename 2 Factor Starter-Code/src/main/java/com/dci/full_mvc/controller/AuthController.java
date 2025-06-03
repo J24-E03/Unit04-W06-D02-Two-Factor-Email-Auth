@@ -2,6 +2,7 @@ package com.dci.full_mvc.controller;
 
 import com.dci.full_mvc.model.User;
 import com.dci.full_mvc.repository.UserRepository;
+import com.dci.full_mvc.service.EmailService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/auth")
@@ -22,6 +24,7 @@ import java.util.List;
 public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
 
 //    @GetMapping /login
@@ -60,14 +63,22 @@ public class AuthController {
             return "auth/signup";
         }
 
+
+        String token = UUID.randomUUID().toString();
+        user.setVerificationToken(token);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
 
 
         userRepository.save(user);
 
+        emailService.sendVerificationEmail(user.getEmail(),token);
+
         return "redirect:/auth/login?registered";
     }
+
+
+
 
     @GetMapping("/login")
     public String loginPage(){

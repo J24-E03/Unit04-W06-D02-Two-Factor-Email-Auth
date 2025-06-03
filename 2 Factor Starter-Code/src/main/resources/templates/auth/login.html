@@ -29,7 +29,11 @@
 
                     <!-- Success message after registration -->
                     <div th:if="${param.registered}" class="alert alert-success" role="alert">
-                        Registration successful. Please log in.
+                        Registration successful. Please Check your email for verification link.
+                    </div>
+
+                    <div th:if="${param.notVerified}" class="alert alert-danger" role="alert">
+                        You are not verified yet. Please check your email for the verification link.
                     </div>
 
                     <form th:action="@{/auth/login}" method="post">

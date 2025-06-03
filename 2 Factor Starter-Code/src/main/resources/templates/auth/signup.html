@@ -28,7 +28,7 @@
                     <div th:if="${emailTaken}" class="text-danger small mt-1">Email Already Taken</div>
 
 
-                    <form th:action="@{/auth/register}" method="post" class="signup-form">
+                    <form th:action="@{/auth/signup}" method="post" class="signup-form">
                         <!-- CSRF Token -->
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 

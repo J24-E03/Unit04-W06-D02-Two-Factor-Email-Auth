@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @SpringBootApplication
 @RequiredArgsConstructor
@@ -52,9 +53,6 @@ public class FullMvcApplication implements CommandLineRunner {
 
 //		System.out.println(movieService.searchMovies(null,null,null));
 
-		System.out.println(userRepository.findByEmail("omar1" +
-				"" +
-				"@gmail.com").get());
 
 
 	}

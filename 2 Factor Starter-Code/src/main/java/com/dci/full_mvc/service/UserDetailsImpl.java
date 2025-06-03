@@ -1,6 +1,7 @@
 package com.dci.full_mvc.service;
 
 import com.dci.full_mvc.exceptions.ResourceNotFound;
+import com.dci.full_mvc.exceptions.UserNotVerifiedException;
 import com.dci.full_mvc.model.User;
 import com.dci.full_mvc.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,9 @@ public class UserDetailsImpl implements UserDetailsService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(()-> new ResourceNotFound("User not found with email: " + email));
 
+        if(!user.isVerified()){
+            throw new UserNotVerifiedException("You are not verfied yet. Please check your email for verification link.");
+        }
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
     }
 }

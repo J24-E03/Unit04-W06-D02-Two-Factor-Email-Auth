@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,6 +31,13 @@ public class User {
     @Column(nullable = false)
     @NotBlank
     private String password;
+
+    private String verificationToken;
+
+    private boolean isVerified = false;
+
+
+
 
 
 }
