@@ -32,8 +32,12 @@
                         Registration successful. Please Check your email for verification link.
                     </div>
 
-                    <div th:if="${param.notVerified}" class="alert alert-danger" role="alert">
-                        You are not verified yet. Please check your email for the verification link.
+                    <div th:if="${param.verified}" class="alert alert-success" role="alert">
+                        Email Successfully verified. You can now log in
+                    </div>
+
+                    <div th:if="${param.accountDeleted}" class="alert alert-success" role="alert">
+                        Account Successfully deleted. You can now create a new account.
                     </div>
 
                     <form th:action="@{/auth/login}" method="post">

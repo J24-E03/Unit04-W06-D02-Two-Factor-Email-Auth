@@ -40,7 +40,7 @@ public class EmailService {
     }
 
     public void sendVerificationEmail(String recipientEmail, String token){
-        String verificationUrl = "http://localhost:8080/verify?token=" + token;
+        String verificationUrl = "http://localhost:8080/auth/verify?token=" + token;
 
         try {
             String htmlContent = loadHtmlTemplate("email-templates/verification-email.html");

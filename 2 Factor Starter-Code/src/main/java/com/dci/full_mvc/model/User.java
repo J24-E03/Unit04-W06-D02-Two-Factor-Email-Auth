@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -35,6 +36,14 @@ public class User {
     private String verificationToken;
 
     private boolean isVerified = false;
+
+
+    private boolean isDeleted = false;
+
+    private LocalDate deletedAt;
+
+    private LocalDateTime createdAt = LocalDateTime.now();
+
 
 
 

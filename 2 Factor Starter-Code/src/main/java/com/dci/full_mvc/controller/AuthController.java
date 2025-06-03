@@ -1,19 +1,19 @@
 package com.dci.full_mvc.controller;
 
+import com.dci.full_mvc.exceptions.ResourceNotFound;
 import com.dci.full_mvc.model.User;
 import com.dci.full_mvc.repository.UserRepository;
 import com.dci.full_mvc.service.EmailService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -77,7 +77,36 @@ public class AuthController {
         return "redirect:/auth/login?registered";
     }
 
+    @GetMapping("/verify")
+    public String verifyEmail(@RequestParam String token, Model model){
+        System.out.println("in Veirfy Route");
+        User user = userRepository.findByVerificationToken(token)
+                .orElseThrow(()-> new ResourceNotFound("User not found with verification token: " + token));
 
+        user.setVerified(true);
+        user.setVerificationToken(null);
+
+        userRepository.save(user);
+
+        return "redirect:/auth/login?verified";
+
+
+    }
+
+
+
+    @PostMapping("/delete-account")
+    public String deleteAccount(Authentication authentication){
+        User user = userRepository.findByEmailAndIsDeletedFalse(authentication.getName())
+                .orElseThrow(()-> new ResourceNotFound("User not found with email: " + authentication.getName()));
+
+        user.setDeleted(true);
+        user.setDeletedAt(LocalDate.now());
+
+        userRepository.save(user);
+
+        return "redirect:/auth/login?accountDeleted";
+    }
 
 
     @GetMapping("/login")
