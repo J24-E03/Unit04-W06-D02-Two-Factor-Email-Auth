@@ -39,7 +39,6 @@ public class Movie implements Serializable {
     @Size(min=5, max = 100, message = "Title must be between 5 and 100 characters")
     private String title;
 
-
     @Min(value=20, message = "Release Year must be after year 20")
     @Max(value=2050,message = "Release year must be before 2050")
     private int releaseYear;
